@@ -25,9 +25,30 @@ app.config.from_object(Config)
 db.init_app(app)
 
 # ==========================
+# Create Database & Default Admin
+# ==========================
+with app.app_context():
+
+    db.create_all()
+
+    admin = Admin.query.filter_by(username="admin").first()
+
+    if not admin:
+        admin = Admin(
+            username="admin",
+            password=generate_password_hash("admin123")
+        )
+
+        db.session.add(admin)
+        db.session.commit()
+
+        print("Default Admin Created!")
+
+# ==========================
 # Upload Folder
 # ==========================
 UPLOAD_FOLDER = "static/uploads"
+
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -53,15 +74,11 @@ def login():
 
         admin = Admin.query.filter_by(username=username).first()
 
-        print("Username:", username)
-        print("Admin:", admin)
-
-        if admin:
-            print("Password Match:", check_password_hash(admin.password, password))
-
         if admin and check_password_hash(admin.password, password):
             session["admin"] = admin.username
+
             flash("Login Successful!", "success")
+
             return redirect(url_for("dashboard"))
 
         flash("Invalid Username or Password!", "danger")
@@ -96,7 +113,6 @@ def dashboard():
         female_students=female_students,
         total_departments=total_departments
     )
-
 
 # ==========================
 # Add Student
@@ -140,6 +156,8 @@ def add_student():
         return redirect(url_for("students"))
 
     return render_template("add_student.html")
+
+
 # ==========================
 # View Students + Search
 # ==========================
@@ -178,8 +196,6 @@ def student_details(id):
         "student_details.html",
         student=student
     )
-
-
 # ==========================
 # Edit Student
 # ==========================
@@ -240,8 +256,9 @@ def delete_student(id):
 
     return redirect(url_for("students"))
 
+
 # ==========================
-# Admin Logout
+# Logout
 # ==========================
 @app.route("/logout")
 def logout():
@@ -257,23 +274,4 @@ def logout():
 # Run Application
 # ==========================
 if __name__ == "__main__":
-
-    with app.app_context():
-
-        db.create_all()
-
-        admin = Admin.query.filter_by(username="admin").first()
-
-        if not admin:
-
-            admin = Admin(
-                username="admin",
-                password=generate_password_hash("admin123")
-            )
-
-            db.session.add(admin)
-            db.session.commit()
-
-            print("Default Admin Created!")
-
-    app.run(host="0.0.0.0", port=5000)
+ app.run(host="0.0.0.0", port=5000) 
