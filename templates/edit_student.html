@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Student
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow p-4">
+
+                <h2 class="text-center mb-4">
+                    Edit Student
+                </h2>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               value="{{ student.name }}"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               value="{{ student.email }}"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text"
+                               name="phone"
+                               class="form-control"
+                               value="{{ student.phone }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Department</label>
+                        <input type="text"
+                               name="department"
+                               class="form-control"
+                               value="{{ student.department }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Semester</label>
+                        <input type="text"
+                               name="semester"
+                               class="form-control"
+                               value="{{ student.semester }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+
+                        <select name="gender" class="form-select">
+
+                            <option value="Male"
+                                {% if student.gender == "Male" %}selected{% endif %}>
+                                Male
+                            </option>
+
+                            <option value="Female"
+                                {% if student.gender == "Female" %}selected{% endif %}>
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+
+                        <textarea
+                            name="address"
+                            class="form-control"
+                            rows="4">{{ student.address or "" }}</textarea>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Update Student
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

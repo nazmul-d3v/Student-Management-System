@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+
+<section class="hero text-center">
+
+    <h1 class="display-3 fw-bold">
+        🎓 Student Management System
+    </h1>
+
+    <p class="lead mt-3">
+        Modern Flask Based Student Management Platform
+    </p>
+
+    <p class="text-muted">
+        Manage Students, Courses, Dashboard and Reports Easily.
+    </p>
+
+    <div class="mt-4">
+
+        <a href="{{ url_for('add_student') }}" class="btn btn-primary btn-lg me-3">
+            Get Started
+        </a>
+
+        <a href="#" class="btn btn-outline-dark btn-lg">
+            Learn More
+        </a>
+
+    </div>
+
+</section>
+
+<hr class="my-5">
+
+<!-- Features -->
+
+<div class="row text-center g-4">
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 h-100">
+
+            <i class="fa-solid fa-user-plus fa-3x text-primary"></i>
+
+            <h4 class="mt-3">
+                Add Student
+            </h4>
+
+            <p>
+                Register new students quickly.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 h-100">
+
+            <i class="fa-solid fa-pen fa-3x text-success"></i>
+
+            <h4 class="mt-3">
+                Update
+            </h4>
+
+            <p>
+                Edit student information easily.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 h-100">
+
+            <i class="fa-solid fa-trash fa-3x text-danger"></i>
+
+            <h4 class="mt-3">
+                Delete
+            </h4>
+
+            <p>
+                Remove student records safely.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow p-4 h-100">
+
+            <i class="fa-solid fa-magnifying-glass fa-3x text-warning"></i>
+
+            <h4 class="mt-3">
+                Search
+            </h4>
+
+            <p>
+                Find students instantly.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Statistics Section -->
+
+<section class="mt-5">
+
+    <div class="row text-center">
+
+        <div class="col-md-3">
+
+            <h1 class="text-primary fw-bold">
+                500+
+            </h1>
+
+            <p>Total Students</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h1 class="text-success fw-bold">
+                25+
+            </h1>
+
+            <p>Teachers</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h1 class="text-danger fw-bold">
+                15+
+            </h1>
+
+            <p>Departments</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h1 class="text-warning fw-bold">
+                100%
+            </h1>
+
+            <p>Secure System</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
