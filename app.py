@@ -262,9 +262,7 @@ if __name__ == "__main__":
 
         db.create_all()
 
-        admin = Admin.query.filter_by(
-            username="admin"
-        ).first()
+        admin = Admin.query.filter_by(username="admin").first()
 
         if not admin:
 
@@ -278,4 +276,4 @@ if __name__ == "__main__":
 
             print("Default Admin Created!")
 
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
